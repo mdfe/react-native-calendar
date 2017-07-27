@@ -56,7 +56,7 @@ export default class Calendar extends Component {
     showControls: PropTypes.bool,
     showEventIndicators: PropTypes.bool,
     startDate: PropTypes.any,
-    titleFormat: PropTypes.string,
+    titleFormat: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     today: PropTypes.any,
     weekStart: PropTypes.number,
     calendarFormat: PropTypes.string
@@ -335,7 +335,7 @@ export default class Calendar extends Component {
     : (
       <View style={[styles.calendarControls, this.props.customStyle.calendarControls]}>
         <Text style={[styles.title, this.props.customStyle.title]}>
-          {this.state.currentMoment.format(this.props.titleFormat)}
+          {typeof this.props.titleFormat === 'function' ? this.props.titleFormat(this.state.currentMoment) : this.state.currentMoment.format(this.props.titleFormat)}
         </Text>
       </View>
     );
@@ -350,7 +350,7 @@ export default class Calendar extends Component {
     return (
       <View style={[styles.calendarContainer, this.props.customStyle.calendarContainer]}>
         {this.renderTopBar()}
-        {this.renderHeading(this.props.titleFormat)}
+        {this.renderHeading()}
         {this.props.scrollEnabled ?
           <ScrollView
               ref={calendar => this._calendar = calendar}
