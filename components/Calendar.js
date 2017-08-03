@@ -143,10 +143,10 @@ export default class Calendar extends Component {
 
   selectAndJumpToToday() {
     const today = new Date();
-    const newMoment = moment(this.state.currentMonthMoment).set('month', today.getMonth());
+    const newMoment = moment(this.state.currentMoment).set('month', today.getMonth());
     this.setState({
       selectedMoment: today,
-      currentMonthMoment: newMoment
+      currentMoment: newMoment
     });
   }
 
@@ -345,7 +345,7 @@ export default class Calendar extends Component {
     const calendarDates = this.getStack(this.state.currentMoment);
     const eventDatesMap = this.prepareEventDates(this.props.eventDates, this.props.events);
     const numOfWeeks = this.props.calendarFormat === 'weekly' ? 1 :
-      getNumberOfWeeks(this.state.currentMonthMoment, this.props.weekStart);
+      getNumberOfWeeks(this.state.currentMoment, this.props.weekStart);
 
     return (
       <View style={[styles.calendarContainer, this.props.customStyle.calendarContainer]}>
